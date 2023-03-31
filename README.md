@@ -1,5 +1,26 @@
-<<<<<<< HEAD
 # green-thumb
+
+One of the most common issues that people encounter when they first start gardening is organization. This is important because most working individuals may not have the time to provide consistent care to plants that require constant upkeep. Many budding hobbyists without proper time management and documentation skills suffer because of this. Green Thumb is built to assist gardeners in staying organized so their gardens may flourish.
+
+## Features
+- Add new plants to a database
+- Add notes to individual plants
+- Start timers to keep track of plant growth/water cycles
+- Jot down notes as they continue to learn about gardening
+
+## Installation
+
+Make sure you have [json-server](https://www.npmjs.com/package/json-server) installed
+Fork and clone this repository, navigate to the directory that contains this program in your terminal then run:
+
+```bash
+json-server --watch db.json
+```
+
+```bash
+npm start
+```
+
 =======
 # Getting Started with Create React App
 
