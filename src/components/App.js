@@ -1,6 +1,8 @@
 import '../App.css';
 import Home from './Home'
+import NavBar from "./NavBar"
 import React, { useState, useEffect } from "react"
+import { Route, Switch } from "react-router-dom"
 
 function App() {
   useEffect(() => {
@@ -14,8 +16,16 @@ function App() {
   return (
     <div className="App">
       <header className="App-header">
-        <Home plants={plants} />
+        <NavBar />
+        <h1>Green Thumb</h1>
       </header>
+      <div>
+        <Switch>
+          <Route exact path="/" >
+            <Home plants={plants} />
+          </Route>
+        </Switch>
+      </div>
     </div>
   );
 }

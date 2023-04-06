@@ -4,7 +4,7 @@
 
 .App-header {
   background-color: mintcream;
-  min-height: 100vh;
+  min-height: 15vh;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -14,9 +14,10 @@
 }
 
 img {
-  height: 50px;
-  width: 50px;
-  border-radius: 50px;
+  height: 100px;
+  width: 100px;
+  border-radius: 100px;
+  margin: 15px;
 }
 
 .plantBloom, .plantAlert {
@@ -30,4 +31,8 @@ img {
 
 .plantName {
   margin-bottom: 0;
+}
+
+.search {
+  margin: 10px;
 }
