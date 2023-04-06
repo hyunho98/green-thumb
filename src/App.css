@@ -12,3 +12,22 @@
   font-size: calc(10px + 2vmin);
   color: black;
 }
+
+img {
+  height: 50px;
+  width: 50px;
+  border-radius: 50px;
+}
+
+.plantBloom, .plantAlert {
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+.plantType {
+  margin-top: 0;
+}
+
+.plantName {
+  margin-bottom: 0;
+}
