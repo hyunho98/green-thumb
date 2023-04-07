@@ -1,5 +1,6 @@
 import '../App.css';
 import Home from './Home'
+import Create from "./Create"
 import NavBar from "./NavBar"
 import React, { useState, useEffect } from "react"
 import { Route, Switch } from "react-router-dom"
@@ -12,6 +13,10 @@ function App() {
   }, [])
 
   const [plants, setPlants] = useState([])
+
+  function onNewPlant(plant) {
+    setPlants([...plants, plant])
+  }
   
   return (
     <div className="App">
@@ -21,6 +26,9 @@ function App() {
       </header>
       <div>
         <Switch>
+          <Route exact path="/create">
+            <Create handleFormSubmit={onNewPlant} />
+          </Route>
           <Route exact path="/" >
             <Home plants={plants} />
           </Route>

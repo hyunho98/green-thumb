@@ -2,10 +2,10 @@ import "../App.css"
 import React, { useState } from "react"
 import { Card, Button } from "semantic-ui-react"
 
-function PlantCard({ id, image, name, type, alert, bloom, timer }) {
-    const [bloomDate, setBloomDate] = useState(new Date(bloom))
+function PlantCard({ id, image, name, type, alert, bloom }) {
+    const [bloomDate, setBloomDate] = useState(bloom)
     const [alertTimer, setAlertTimer] = useState(new Date(alert.date))
-    const timeLeft = (alertTimer - Date.now()) / 1000
+    const timeLeft = (alertTimer - Date.now()) > 0 ? (alertTimer - Date.now()) / 1000 : 0
     const hours = Math.floor((timeLeft / 3600))
     const minutes = Math.floor((timeLeft % (3600)) / (60))
     const seconds = Math.floor((timeLeft % (60)))
@@ -39,7 +39,7 @@ function PlantCard({ id, image, name, type, alert, bloom, timer }) {
                     <h4 className="plantAlert">Time to Water</h4>
                     <h4 className="plantAlert">{hours + "h " + minutes + "m " + seconds + "s"}</h4>
                     <h4 className="plantBloom"> Bloom Date</h4>
-                    <h4 className="plantBloom">{`${bloomDate.getMonth() + 1}-${bloomDate.getDay()}-${bloomDate.getFullYear()}`}</h4>
+                    <h4 className="plantBloom">{bloomDate}</h4>
                     <Button onClick={clickHandler} className="resetButton" basic color="green">
                         Reset
                     </Button>
