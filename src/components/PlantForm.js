@@ -1,7 +1,7 @@
 import React from "react"
 import { Form, Label } from "semantic-ui-react";
 
-function PlantForm() {
+function PlantForm({ handleFormSubmit }) {
     function submitHandler(e) {
         e.preventDefault()
     
@@ -23,7 +23,7 @@ function PlantForm() {
         })
           .then((r) => r.json())
           .then((data) => {
-            console.log(data)
+            handleFormSubmit(data)
           })
       }
     
