@@ -1,9 +1,9 @@
 .App {
   text-align: center;
+  background-color: mintcream;
 }
 
 .App-header {
-  background-color: mintcream;
   min-height: 15vh;
   display: flex;
   flex-direction: column;
@@ -35,4 +35,8 @@ img {
 
 .search {
   margin: 10px;
+}
+
+.resetButton {
+  margin: 10px !important;
 }

@@ -21,6 +21,20 @@ function NavBar() {
         >
           Home
         </NavLink>
+        <NavLink
+          to="/create"
+          exact
+          style={linkStyles}
+        >
+          Create
+        </NavLink>
+        <NavLink
+          to="/edit"
+          exact
+          style={linkStyles}
+        >
+          Edit
+        </NavLink>
       </div>
     )
 }

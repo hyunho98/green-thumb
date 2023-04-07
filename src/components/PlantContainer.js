@@ -7,7 +7,7 @@ function PlantContainer({ plants }) {
 
     useEffect(() => {
         const interval = setInterval(() => {
-            setTimer(Date.now())
+            setTimer(timer => timer + 1000)
         }, 1000)
 
         return (() => clearInterval(interval))
@@ -16,9 +16,10 @@ function PlantContainer({ plants }) {
     const plantList = plants.map((plant) => 
         <PlantCard 
             key={plant.id}
+            id={plant.id}
             image={plant.image}
             name={plant.name}
-            alert={plant["alert-time"]}
+            alert={plant.alert}
             bloom={plant["bloom-date"]}
             type={plant.type}
             timer={timer}
