@@ -1,8 +1,10 @@
 import "../App.css"
 import React, { useState } from "react"
 import { Card, Button } from "semantic-ui-react"
+import { Redirect } from "react-router-dom"
 
 function PlantCard({ id, image, name, type, alert, bloom }) {
+    const [redirect, setRedirect] = useState(false)
     const [bloomDate, setBloomDate] = useState(bloom)
     const [alertTimer, setAlertTimer] = useState(new Date(alert.date))
     const timeLeft = (alertTimer - Date.now()) > 0 ? (alertTimer - Date.now()) / 1000 : 0
@@ -10,7 +12,7 @@ function PlantCard({ id, image, name, type, alert, bloom }) {
     const minutes = Math.floor((timeLeft % (3600)) / (60))
     const seconds = Math.floor((timeLeft % (60)))
 
-    function clickHandler() {
+    function resetHandler() {
         fetch(`http://localhost:3000/plants/${id}`,{
             method: "PATCH",
             headers: {
@@ -27,6 +29,12 @@ function PlantCard({ id, image, name, type, alert, bloom }) {
             .then((data) => setAlertTimer(data.alert.date))
     }
 
+    function editHandler() {
+        setRedirect(() => true)
+    }
+
+    if (redirect) return <Redirect to={`/edit/${id}`} />
+
     return (
         <Card>
             <div>
@@ -40,8 +48,11 @@ function PlantCard({ id, image, name, type, alert, bloom }) {
                     <h4 className="plantAlert">{hours + "h " + minutes + "m " + seconds + "s"}</h4>
                     <h4 className="plantBloom"> Bloom Date</h4>
                     <h4 className="plantBloom">{bloomDate}</h4>
-                    <Button onClick={clickHandler} className="resetButton" basic color="green">
+                    <Button onClick={resetHandler} className="resetButton" basic color="green">
                         Reset
+                    </Button>
+                    <Button onClick={editHandler} className="editButton" basic color="green">
+                        Edit
                     </Button>
                 </div>
             </div>

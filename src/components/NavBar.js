@@ -28,13 +28,6 @@ function NavBar() {
         >
           Create
         </NavLink>
-        <NavLink
-          to="/edit"
-          exact
-          style={linkStyles}
-        >
-          Edit
-        </NavLink>
       </div>
     )
 }
