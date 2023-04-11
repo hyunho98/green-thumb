@@ -8,7 +8,7 @@ import { Route, Switch } from "react-router-dom"
 
 function App() {
   useEffect(() => {
-    fetch(`http://localhost:3000/plants`)
+    fetch(`https://green-thumb-server.onrender.com/plants`)
         .then((r) => r.json())
         .then((data) => setPlants(data))
   }, [])
