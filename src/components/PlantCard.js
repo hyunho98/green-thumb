@@ -5,8 +5,8 @@ import { Redirect } from "react-router-dom"
 
 function PlantCard({ id, image, name, type, alert, bloom }) {
     const [redirect, setRedirect] = useState(false)
-    const [bloomDate, setBloomDate] = useState(bloom)
     const [alertTimer, setAlertTimer] = useState(new Date(alert.date))
+    const bloomDate = bloom
     const timeLeft = (alertTimer - Date.now()) > 0 ? (alertTimer - Date.now()) / 1000 : 0
     const hours = Math.floor((timeLeft / 3600))
     const minutes = Math.floor((timeLeft % (3600)) / (60))
