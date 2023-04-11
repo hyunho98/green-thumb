@@ -16,11 +16,10 @@ function PlantForm({ handleFormSubmit, plant=null, deletePlant=null }) {
     const nameHolder = plant ? plant.name : "Plant Name"
     const typeHolder = plant ? plant.type : "Plant Type"
     const hourHolder = plant ? (plant.alert.time / 3600000) + " Hours" : "Hours"
-    const [dateHold, setDateHold] = useState(plant ? plant["bloom-date"] : new Date().toISOString().slice(0,10))
+    const dateHolder = plant ? plant["bloom-date"] : new Date().toISOString().slice(0,10)
 
     function submitHandler(e) {
         e.preventDefault()
-        console.log(dateHold)
         const fetchBody = {
             "name": e.target.name.value ? e.target.name.value : nameHolder,
             "type": e.target.type.value ? e.target.type.value : typeHolder,
@@ -29,7 +28,7 @@ function PlantForm({ handleFormSubmit, plant=null, deletePlant=null }) {
                 "time": e.target.timer.value ? parseInt(e.target.timer.value) * 3600000 : (plant ? plant.alert.time : 0),
                 "date": e.target.timer.value ? (e.target.timer.value * 3600000) + Date.now() : (plant ? plant.alert.date : Date.now())
             },
-            "bloom-date": dateHold
+            "bloom-date": e.target.date.value ? e.target.date.value : dateHolder
         }
 
         if(plant) {
@@ -41,7 +40,10 @@ function PlantForm({ handleFormSubmit, plant=null, deletePlant=null }) {
                 body: JSON.stringify(fetchBody)
             })
                 .then((r) => r.json())
-                .then((data) => handleFormSubmit(data))
+                .then((data) => {
+                    handleFormSubmit(data)
+                    setRedirect(true)
+                })
         } else {
             fetch(`http://localhost:3000/plants`,{
                 method: "POST",
@@ -51,10 +53,11 @@ function PlantForm({ handleFormSubmit, plant=null, deletePlant=null }) {
                 body: JSON.stringify(fetchBody)
             })
                 .then((r) => r.json())
-                .then((data) => handleFormSubmit(data))
+                .then((data) => {
+                    handleFormSubmit(data)
+                    setRedirect(true)
+                })
         }
-
-        setRedirect(true)
     }
 
     function deleteHandler() {
@@ -67,6 +70,7 @@ function PlantForm({ handleFormSubmit, plant=null, deletePlant=null }) {
             .then((r) => r.json())
             .then(() => {
                 deletePlant(plant.id)
+                setRedirect(true)
             })
     }
 
@@ -91,10 +95,8 @@ function PlantForm({ handleFormSubmit, plant=null, deletePlant=null }) {
                 name="timer"
                 />
                 <Form.Input
-                    onChange={(e) => setDateHold(e.target.value)}
                     label="Bloom Date" 
                     type="date" 
-                    value={dateHold} 
                     min={new Date().toISOString().slice(0,10)}
                     name="date"
                 />
