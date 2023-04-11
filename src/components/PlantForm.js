@@ -32,7 +32,7 @@ function PlantForm({ handleFormSubmit, plant=null, deletePlant=null }) {
         }
 
         if(plant) {
-            fetch(`http://localhost:3000/plants/${plant.id}`,{
+            fetch(`https://green-thumb-server.onrender.com/plants/${plant.id}`,{
                 method: "PATCH",
                 headers: {
                     "Content-Type": "application/json"
@@ -45,7 +45,7 @@ function PlantForm({ handleFormSubmit, plant=null, deletePlant=null }) {
                     setRedirect(true)
                 })
         } else {
-            fetch(`http://localhost:3000/plants`,{
+            fetch(`https://green-thumb-server.onrender.com/plants`,{
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json"
@@ -61,7 +61,7 @@ function PlantForm({ handleFormSubmit, plant=null, deletePlant=null }) {
     }
 
     function deleteHandler() {
-        fetch(`http://localhost:3000/plants/${plant.id}`,{
+        fetch(`https://green-thumb-server.onrender.com/plants/${plant.id}`,{
             method: "DELETE",
             headers: {
                 "Content-Type": "application/json"

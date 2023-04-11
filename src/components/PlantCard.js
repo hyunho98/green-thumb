@@ -13,7 +13,7 @@ function PlantCard({ id, image, name, type, alert, bloom }) {
     const seconds = Math.floor((timeLeft % (60)))
 
     function resetHandler() {
-        fetch(`http://localhost:3000/plants/${id}`,{
+        fetch(`https://green-thumb-server.onrender.com/plants/${id}`,{
             method: "PATCH",
             headers: {
                 "Content-Type": "application/json"
