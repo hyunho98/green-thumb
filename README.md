@@ -4,9 +4,8 @@ One of the most common issues that people encounter when they first start garden
 
 ## Features
 - Add new plants to a database
-- Add notes to individual plants
-- Start timers to keep track of plant growth/water cycles
-- Jot down notes as they continue to learn about gardening
+- Edit or Delete plants from the database
+- Set and reset timers that could be used to keep track of watering cycles
 
 ## Installation
 
