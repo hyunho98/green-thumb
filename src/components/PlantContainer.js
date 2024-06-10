@@ -22,7 +22,6 @@ function PlantContainer({ plants }) {
             alert={plant.alert}
             bloom={plant["bloom-date"]}
             type={plant.type}
-            
         />
     )
 

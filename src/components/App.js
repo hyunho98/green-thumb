@@ -3,8 +3,10 @@ import Home from './Home'
 import Create from "./Create"
 import Edit from "./Edit"
 import NavBar from "./NavBar"
-import React, { useState, useEffect } from "react"
-import { Route, Switch } from "react-router-dom"
+import React, { useState, useEffect, createContext } from "react"
+import { Route, Switch, useHistory } from "react-router-dom"
+
+export const HistoryContext = createContext(null)
 
 function App() {
   useEffect(() => {
@@ -13,6 +15,7 @@ function App() {
         .then((data) => setPlants(data))
   }, [])
 
+  const history = useHistory()
   const [plants, setPlants] = useState([])
 
   function onNewPlant(plant) {
@@ -26,18 +29,21 @@ function App() {
         <h1>Green Thumb</h1>
       </header>
       <div>
-        <Switch>
-          <Route exact path="/create">
-            <Create handleFormSubmit={onNewPlant} />
-          </Route>
-          <Route path="/edit/:id">
-            <Edit plants={plants} setPlants={setPlants} />
-          </Route>
-          <Route exact path="/" >
-            <Home plants={plants} />
-          </Route>
-        </Switch>
+        <HistoryContext.Provider value={history}>
+          <Switch>
+            <Route exact path="/create">
+              <Create handleFormSubmit={onNewPlant} />
+            </Route>
+            <Route path="/edit/:id">
+              <Edit plants={plants} setPlants={setPlants} />
+            </Route>
+            <Route exact path="/" >
+              <Home plants={plants} />
+            </Route>
+          </Switch>
+        </HistoryContext.Provider>
       </div>
+      
     </div>
   );
 }

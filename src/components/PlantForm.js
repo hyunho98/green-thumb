@@ -1,10 +1,10 @@
-import React, { useState } from "react"
+import { HistoryContext } from './App'
+import { useState, useContext } from "react"
 import { Form, Button } from "semantic-ui-react"
-import { Redirect } from "react-router-dom"
 
 function PlantForm({ handleFormSubmit, plant=null, deletePlant=null }) {
+    const history = useContext(HistoryContext)
     const welcomeMessage = (plant ? <h3>Editing Plant</h3> : <h3>Create a New Plant</h3>)
-    const [redirect, setRedirect] = useState(false)
     const deleteButton = <Button 
         onClick={deleteHandler} 
         color="red" 
@@ -42,7 +42,7 @@ function PlantForm({ handleFormSubmit, plant=null, deletePlant=null }) {
                 .then((r) => r.json())
                 .then((data) => {
                     handleFormSubmit(data)
-                    setRedirect(true)
+                    history.push(`/`)
                 })
         } else {
             fetch(`https://green-thumb-server.onrender.com/plants`,{
@@ -55,7 +55,7 @@ function PlantForm({ handleFormSubmit, plant=null, deletePlant=null }) {
                 .then((r) => r.json())
                 .then((data) => {
                     handleFormSubmit(data)
-                    setRedirect(true)
+                    history.push(`/`)
                 })
         }
     }
@@ -70,16 +70,14 @@ function PlantForm({ handleFormSubmit, plant=null, deletePlant=null }) {
             .then((r) => r.json())
             .then(() => {
                 deletePlant(plant.id)
-                setRedirect(true)
+                history.push(`/`)
             })
     }
-
-      if (redirect) return <Redirect to="/" />
     
-      return (
+    return (
         <div>
-          {welcomeMessage}
-          <Form className="plantForm" onSubmit={submitHandler} >
+            {welcomeMessage}
+            <Form className="plantForm" onSubmit={submitHandler} >
                 <Form.Input
                     onChange={(e) => setImageHold(e.target.value)}
                     label="Plant Image url"
@@ -116,12 +114,11 @@ function PlantForm({ handleFormSubmit, plant=null, deletePlant=null }) {
                     min={new Date().toISOString().slice(0,10)}
                     name="date"
                 />
-
-            <Form.Button>Submit</Form.Button>
-          </Form>
-          {plant ? deleteButton : null}
+                <Form.Button>Submit</Form.Button>
+            </Form>
+            {plant ? deleteButton : null}
         </div>
-      )
+    )
 }
 
 export default PlantForm

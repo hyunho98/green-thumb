@@ -1,10 +1,10 @@
 import "../App.css"
-import React, { useState } from "react"
+import { HistoryContext } from './App'
+import { useState, useContext } from "react"
 import { Card, Button } from "semantic-ui-react"
-import { Redirect } from "react-router-dom"
 
 function PlantCard({ id, image, name, type, alert, bloom }) {
-    const [redirect, setRedirect] = useState(false)
+    const history = useContext(HistoryContext)
     const [alertTimer, setAlertTimer] = useState(new Date(alert.date))
     const bloomDate = bloom
     const timeLeft = (alertTimer - Date.now()) > 0 ? (alertTimer - Date.now()) / 1000 : 0
@@ -30,16 +30,14 @@ function PlantCard({ id, image, name, type, alert, bloom }) {
     }
 
     function editHandler() {
-        setRedirect(() => true)
+        history.push(`/edit/${id}`)
     }
-
-    if (redirect) return <Redirect to={`/edit/${id}`} />
 
     return (
         <Card>
             <div>
                 <div className="plant-image">
-                    <img src={image} alt="image missing" />
+                    <img src={image} alt="missing" />
                 </div>
                 <div className="content">
                     <h3 className="plantName">{name}</h3>
