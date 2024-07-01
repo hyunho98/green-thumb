@@ -1,9 +1,9 @@
 import React from "react"
 import PlantForm from "./PlantForm"
 
-function Create({ handleFormSubmit }) {
+function Create() {
     return (
-        <PlantForm handleFormSubmit={handleFormSubmit} />
+        <PlantForm />
     )
 }
 

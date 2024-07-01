@@ -1,10 +1,10 @@
 import "../App.css"
-import { HistoryContext } from './App'
 import { useState, useContext } from "react"
 import { Card, Button } from "semantic-ui-react"
+import { Context } from './context/ContextProvider'
 
 function PlantCard({ id, image, name, type, alert, bloom }) {
-    const history = useContext(HistoryContext)
+    const { history } = useContext(Context)
     const [alertTimer, setAlertTimer] = useState(new Date(alert.date))
     const bloomDate = bloom
     const timeLeft = (alertTimer - Date.now()) > 0 ? (alertTimer - Date.now()) / 1000 : 0
