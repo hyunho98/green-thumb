@@ -3,19 +3,10 @@ import Home from './Home'
 import Create from "./Create"
 import Edit from "./Edit"
 import NavBar from "./NavBar"
-import React, { useState, useEffect, createContext } from "react"
 import { Route, Switch, useHistory } from "react-router-dom"
-import { ContextProvider } from './context/ContextProvider'
-
-export const HistoryContext = createContext(null)
+import ContextProvider from './context/ContextProvider'
 
 function App() {
-  // useEffect(() => {
-  //   fetch(`https://green-thumb-server.onrender.com/plants`)
-  //       .then((r) => r.json())
-  //       .then((data) => setPlants(data))
-  // }, [])
-
   return (
     <div className="App">
       <header className="App-header">

@@ -3,7 +3,7 @@ import { Form, Button } from "semantic-ui-react"
 import { Context } from './context/ContextProvider'
 
 function PlantForm({ plant=null }) {
-    const { history, addNewPlant, editPlant, deletePlant, idCounter }= useContext(Context)
+    const { newPlant, editPlant, deletePlant }= useContext(Context)
     const welcomeMessage = (plant ? <h3>Editing Plant</h3> : <h3>Create a New Plant</h3>)
 
     const [imageHold, setImageHold] = useState(plant ? plant.image : null)
@@ -28,52 +28,14 @@ function PlantForm({ plant=null }) {
         }
 
         if(plant) {
-            // fetch(`https://green-thumb-server.onrender.com/plants/${plant.id}`,{
-            //     method: "PATCH",
-            //     headers: {
-            //         "Content-Type": "application/json"
-            //     },
-            //     body: JSON.stringify(fetchBody)
-            // })
-            //     .then((r) => r.json())
-            //     .then((data) => {
-            //         editPlant(data)
-            //         history.push(`/`)
-            //     })
             editPlant(fetchBody)
-            history.push('/')
         } else {
-            // fetch(`https://green-thumb-server.onrender.com/plants`,{
-            //     method: "POST",
-            //     headers: {
-            //         "Content-Type": "application/json"
-            //     },
-            //     body: JSON.stringify(fetchBody)
-            // })
-            //     .then((r) => r.json())
-            //     .then((data) => {
-            //         addNewPlant(data)
-            //         history.push(`/`)
-            //     })
-            addNewPlant(fetchBody)
-            history.push('/')
+            newPlant(fetchBody)
         }
     }
 
     function deleteHandler() {
-        // fetch(`https://green-thumb-server.onrender.com/plants/${plant.id}`,{
-        //     method: "DELETE",
-        //     headers: {
-        //         "Content-Type": "application/json"
-        //     }
-        // })
-        //     .then((r) => r.json())
-        //     .then(() => {
-        //         deletePlant(plant.id)
-        //         history.push(`/`)
-        //     })
         deletePlant(plant.id)
-        history.push('/')
     }
     
     return (

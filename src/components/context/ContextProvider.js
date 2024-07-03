@@ -6,39 +6,61 @@ export const Context = createContext()
 function ContextProvider({ children }) {
     const history = useHistory()
     const [plants, setPlants] = useState([])
-    let idCounter = localStorage.getItem('idCount') ? localStorage.getItem('idCount') : 0
 
     useEffect(() => {
-        const data = JSON.parse(localStorage.getItem('plants'))
-        if (data) {
-            setPlants(data)
-        }
+        fetch(`https://green-thumb-server.onrender.com/plants`)
+            .then((r) => r.json())
+            .then((data) => setPlants(data))
     }, [])
 
-    useEffect(() => {
-        localStorage.setItem('plants', JSON.stringify(plants))
-    }, [plants])
-
-    useEffect(() => {
-        localStorage.setItem('idCount', `${idCounter}`)
-    }, [idCounter])
-
-    function addNewPlant(plant) {
-        setPlants([...plants, plant])
+    function newPlant(plant) {
+        fetch(`https://green-thumb-server.onrender.com/plants`,{
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify(plant)
+            })
+                .then((r) => r.json())
+                .then((data) => {
+                    setPlants([...plants, data])
+                    history.push(`/`)
+                })
     }
 
     function editPlant(plant) {
-        setPlants(plants.map((p) => (p.id === plant.id) ? plant : p))
+        fetch(`https://green-thumb-server.onrender.com/plants/${plant.id}`,{
+            method: "PATCH",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(plant)
+        })
+            .then((r) => r.json())
+            .then((data) => {
+                setPlants(plants.map((p) => (p.id === data.id) ? data : p))
+                history.push(`/`)
+            })
     }
 
     function deletePlant(id) {
-        setPlants(plants.filter((plant) => plant.id == id ? false : true))
+        fetch(`https://green-thumb-server.onrender.com/plants/${id}`,{
+            method: "DELETE",
+            headers: {
+                "Content-Type": "application/json"
+            }
+        })
+            .then((r) => r.json())
+            .then(() => {
+                setPlants(plants.filter((plant) => plant.id == id ? false : true))
+                history.push(`/`)
+            })
     }
 
     return <Context.Provider value={{
         history,
         plants, setPlants,
-        addNewPlant, editPlant, deletePlant
+        newPlant, editPlant, deletePlant
     }}>
         {children}
     </Context.Provider>
