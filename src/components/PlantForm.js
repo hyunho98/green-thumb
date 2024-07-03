@@ -11,7 +11,6 @@ function PlantForm({ plant=null }) {
     const [typeHold, setTypeHold] = useState(plant ? plant.type : null)
     const [hourHold, setHourHold] = useState(plant ? (plant.alert.time / 3600000) : null)
     const dateHold = plant ? plant["bloom-date"] : new Date().toISOString().slice(0,10)
-    const idHold = plant ? plant.id : idCounter
 
     function submitHandler(e) {
         e.preventDefault()
@@ -23,8 +22,7 @@ function PlantForm({ plant=null }) {
                 "time": hourHold ? parseInt(hourHold) * 3600000 : (plant ? plant.alert.time : 0),
                 "date": hourHold ? (hourHold * 3600000) + Date.now() : (plant ? plant.alert.date : Date.now())
             },
-            "bloom-date": e.target.date.value ? e.target.date.value : dateHold,
-            "id": idHold
+            "bloom-date": e.target.date.value ? e.target.date.value : dateHold
         }
 
         if(plant) {
