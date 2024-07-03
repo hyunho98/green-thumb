@@ -3,7 +3,7 @@ import Home from './Home'
 import Create from "./Create"
 import Edit from "./Edit"
 import NavBar from "./NavBar"
-import { Route, Switch, useHistory } from "react-router-dom"
+import { Route, Switch } from "react-router-dom"
 import ContextProvider from './context/ContextProvider'
 
 function App() {
